@@ -13,7 +13,7 @@ Deploy a highly available web application on Azure using:
 
 ## Architecture
 
-(Architecture image here)
+(Architecture image in the Architecture Folder)
 
 ## Current Status
 

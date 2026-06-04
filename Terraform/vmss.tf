@@ -45,6 +45,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss01" {
     }
   }
 
+  custom_data = base64encode("${path.module}/Scripts/cloud-init.sh")
+
   tags = {
     Environment = "Lab"
     ManagedBy   = "Terraform"
