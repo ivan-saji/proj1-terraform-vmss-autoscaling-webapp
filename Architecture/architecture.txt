@@ -1,0 +1,44 @@
+resource group 1- Terraform backend to store state file
+    resource group name : rg01-backend
+    storage account name : rg01-st01-backend
+        container name : tfstate
+            statefile name : infra.tfstate
+
+
+resource group 2 - Required cloud infra resource group
+    name : rg02-infra
+
+    vnet: Virtual Network of the entire infra
+        name : rg02-vnet01-infra
+        address space : 10.0.0.0/16
+
+        snet : subnet of the entire infra
+            name : rg02-vnet01-snet01-infra
+
+    NSG : To allow incoming and outgoing connections on port 80
+        name : rg02-vnet01-snet01-nsg01-infra
+            rules : allow inbound and outbound on port 80,443,22
+
+    NAT Gateway : For security updates, private secure connection to internet
+        name : rg02-vnet01-snet01-natgw01-infra
+
+
+    VMSS : Autoscaling VMSS
+    	name : rg02-vmss01-infra
+        Autoscaling rules : Default : 2, Minimum : 1, Max :5, CPU > 80% = add VM, CPU < 10% remove VM
+        
+
+
+        Public IP : for customers to access VM publically
+            name : rg02-vnet01-pubip01-infra
+            Allow 80/443
+        
+        Load Balancer :
+            name : rg02-vnet01-lb01-infra
+            Allow 80/443
+------ Done---------------
+
+
+Part 2:
+Every resource should have the tag "modified on" with current timestamp
+Only load balancer should be able to access through NSG
