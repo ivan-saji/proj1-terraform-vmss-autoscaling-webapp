@@ -2,7 +2,7 @@
 resource "azurerm_lb" "rg02-vnet01-lb01-infra" {
   name                = "rg02-vnet01-lb01-infra"
   location            = local.location
-  resource_group_name = local.resource_group_name
+  resource_group_name = azurerm_resource_group.rg02-infra.name
   sku                 = "Standard"
 
   frontend_ip_configuration {

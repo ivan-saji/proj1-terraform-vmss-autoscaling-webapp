@@ -2,7 +2,7 @@
 resource "azurerm_virtual_network" "rg02-vnet01-infra" {
   name                = local.vnet_name
   location            = local.location
-  resource_group_name = local.resource_group_name
+  resource_group_name = azurerm_resource_group.rg02-infra.name
   address_space       = local.vnet_address_space
 
   tags = {
@@ -14,7 +14,7 @@ resource "azurerm_virtual_network" "rg02-vnet01-infra" {
 resource "azurerm_public_ip" "rg02-vnet01-pubip01-infra" {
   name                = "rg02-vnet01-pubip01-infra"
   location            = local.location
-  resource_group_name = local.resource_group_name
+  resource_group_name = azurerm_resource_group.rg02-infra.name
   allocation_method   = "Static"
   sku                 = "Standard"
 }
@@ -23,7 +23,7 @@ resource "azurerm_public_ip" "rg02-vnet01-pubip01-infra" {
 resource "azurerm_public_ip" "rg02-vnet01-pubip02-infra" {
   name                = "rg02-vnet01-pubip02-infra"
   location            = local.location
-  resource_group_name = local.resource_group_name
+  resource_group_name = azurerm_resource_group.rg02-infra.name
   allocation_method   = "Static"
   sku                 = "Standard"
 }
@@ -31,7 +31,7 @@ resource "azurerm_public_ip" "rg02-vnet01-pubip02-infra" {
 #define subnet seperately for code flexibility
 resource "azurerm_subnet" "rg02-vnet01-snet01-infra" {
   name                 = local.subnet1_name
-  resource_group_name  = local.resource_group_name
+  resource_group_name  = azurerm_resource_group.rg02-infra.name
   virtual_network_name = azurerm_virtual_network.rg02-vnet01-infra.name
   address_prefixes     = [local.subnet1_address_prefix]
 }

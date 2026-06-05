@@ -1,7 +1,7 @@
 resource "azurerm_network_security_group" "rg02-vnet01-snet01-nsg01-infra" {
   name                = local.subnet1_nsg_name
   location            = local.location
-  resource_group_name = local.resource_group_name
+  resource_group_name = azurerm_resource_group.rg02-infra.name
   tags = {
     environment = local.environment
   }

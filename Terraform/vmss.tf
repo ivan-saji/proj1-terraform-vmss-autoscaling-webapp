@@ -2,21 +2,21 @@
 resource "azurerm_linux_virtual_machine_scale_set" "vmss01" {
 
   name                = local.vmss_name
-  resource_group_name = local.resource_group_name
+  resource_group_name = azurerm_resource_group.rg02-infra.name
   location            = local.location
 
-  sku       = "Standard_B1ms"
+  sku       = "Standard_F1als_v7"
   instances = local.vmss_default_capacity
 
   admin_username = "adminuser"
 
   disable_password_authentication = false
-  admin_password                  = "testvmss123"
+  admin_password                  = "TestVMSS#12345"
 
   source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
+    sku       = "22_04-lts-gen2"
     version   = "latest"
   }
 
@@ -45,7 +45,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss01" {
     }
   }
 
-  custom_data = base64encode("${path.module}/Scripts/cloud-init.sh")
+  custom_data = filebase64("../Scripts/cloud-init.sh")
 
   tags = {
     Environment = "Lab"
@@ -59,7 +59,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss01" {
 resource "azurerm_monitor_autoscale_setting" "vmss_autoscale" {
 
   name                = "${local.vmss_name}-autoscale"
-  resource_group_name = local.resource_group_name
+  resource_group_name = azurerm_resource_group.rg02-infra.name
   location            = local.location
 
   target_resource_id = azurerm_linux_virtual_machine_scale_set.vmss01.id
