@@ -24,9 +24,8 @@ Deploy a highly available web application on Azure using:
 - [x] NAT Gateway
 - [x] Load Balancer
 - [x] VMSS
-- [ ] Cloud-init
-- [ ] Web Application Deployment
-- [ ] Hostname Display
-- [ ] Autoscaling Validation
+- [x] Cloud-init
+- [x] Web Application Deployment
+- [x] Autoscaling Validation
 - [ ] Azure Monitor
 - [ ] Grafana
