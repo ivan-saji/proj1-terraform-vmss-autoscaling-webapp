@@ -27,5 +27,9 @@ Deploy a highly available web application on Azure using:
 - [x] Cloud-init
 - [x] Web Application Deployment
 - [x] Autoscaling Validation
-- [ ] Azure Monitor
+- [x] Azure Monitor
+    - [x] Create Log Analytics Workspace
+    - [x] AddAMA extension in VMSS
+    - [x] DCR Rules
+    - [x] Workspaces
 - [ ] Grafana
