@@ -143,3 +143,10 @@ resource "azurerm_virtual_machine_scale_set_extension" "vmss_extension" {
   type_handler_version         = "1.10"
   auto_upgrade_minor_version   = true 
 }
+
+#DCR Association with VMSS Extension
+resource "azurerm_monitor_data_collection_rule_association" "dcr_association" {
+  name                = "dcr-association"
+  target_resource_id = azurerm_virtual_machine_scale_set.vmss01.id
+  data_collection_rule_id = azurerm_monitor_data_collection_rule.vmss_dcr01.id
+}

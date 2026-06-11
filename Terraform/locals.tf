@@ -8,6 +8,9 @@ locals {
   #Infra Resource Group name
   resource_group_name = "rg02-infra"
 
+  #Monitoring Resource Group name
+  monitoring_resource_group_name = "rg03-monitoring"
+
   #Vnet Details
   vnet_name          = "rg02-vnet01-infra"
   vnet_address_space = ["10.0.0.0/16"]
