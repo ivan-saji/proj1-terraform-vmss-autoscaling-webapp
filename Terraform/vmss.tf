@@ -147,6 +147,6 @@ resource "azurerm_virtual_machine_scale_set_extension" "vmss_extension" {
 #DCR Association with VMSS Extension
 resource "azurerm_monitor_data_collection_rule_association" "dcr_association" {
   name                = "dcr-association"
-  target_resource_id = azurerm_virtual_machine_scale_set.vmss01.id
+  target_resource_id = azurerm_linux_virtual_machine_scale_set.vmss01.id
   data_collection_rule_id = azurerm_monitor_data_collection_rule.vmss_dcr01.id
 }

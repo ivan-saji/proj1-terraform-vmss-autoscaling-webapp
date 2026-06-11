@@ -6,6 +6,6 @@ resource "azurerm_resource_group" "rg02-infra" {
 }
 
 resource "azurerm_resource_group" "rg03-monitoring" {
-  name     = local.resource_group_name
+  name     = local.monitoring_resource_group_name
   location = local.location
 }
