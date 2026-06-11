@@ -72,9 +72,20 @@ locals {
   nat_gateway_name = "rg02-vnet01-snet01-natgw01-infra"
 
   #VMSS Details
-  vmss_name = "rg02-vmss01-infra"
-  vmss_default_capacity = 2
+  vmss_name             = "rg02-vmss01-infra"
+  vmss_default_capacity = 1
   vmss_minimum_capacity = 1
   vmss_maximum_capacity = 5
 
+  #Monitoring Alert Thresholds
+  alert_thresholds = {
+    cpu_warning  = 80
+    cpu_critical = 95
+
+    memory_warning  = 80
+    memory_critical = 95
+  }
+
+  alert_mail_to = "isajiabraham@gmail.com"
 }
+
