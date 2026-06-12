@@ -10,3 +10,50 @@ resource "azurerm_monitor_action_group" "email_alerts" {
     use_common_alert_schema = true
   }
 }
+
+#CPU Alert Rules
+
+resource "azurerm_monitor_metric_alert" "cpu-alert-95" {
+  name                = "cpu-alert-95"
+  resource_group_name = azurerm_resource_group.rg03-monitoring.name
+  scopes              = [azurerm_linux_virtual_machine_scale_set.vmss01.id]
+  description         = "Action will be triggered when CPU usage is greater than 95%."
+
+  frequency = "PT1M"
+  severity  = 0
+  window_size = "PT5M"
+
+  criteria {
+    metric_namespace = "Microsoft.Compute/virtualMachineScaleSets"
+    metric_name      = "Percentage CPU"
+    aggregation      = "Maximum"
+    operator         = "GreaterThan"
+    threshold        = 95
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.email_alerts.id
+  }
+}
+resource "azurerm_monitor_metric_alert" "cpu-alert-80" {
+  name                = "cpu-alert-80"
+  resource_group_name = azurerm_resource_group.rg03-monitoring.name
+  scopes              = [azurerm_linux_virtual_machine_scale_set.vmss01.id]
+  description         = "Action will be triggered when CPU usage is greater than 80%."
+
+  frequency = "PT1M"
+  severity  = 2
+  window_size = "PT5M"
+
+  criteria {
+    metric_namespace = "Microsoft.Compute/virtualMachineScaleSets"
+    metric_name      = "Percentage CPU"
+    aggregation      = "Maximum"
+    operator         = "GreaterThan"
+    threshold        = 80
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.email_alerts.id
+  }
+}
