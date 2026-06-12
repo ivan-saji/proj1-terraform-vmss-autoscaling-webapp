@@ -79,10 +79,10 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "memory_warning-80" {
   criteria {
 
     query = <<QUERY
-Perf
-| where CounterName == "% Committed Bytes In Use"
-| summarize AvgMemory = avg(CounterValue) by bin(TimeGenerated, 5m)
-QUERY
+      Perf
+      | where CounterName == "% Committed Bytes In Use"
+      | summarize AvgMemory = avg(CounterValue) by bin(TimeGenerated, 5m)
+      QUERY
 
     operator  = "GreaterThan"
     threshold = local.alert_thresholds.memory_warning
@@ -118,15 +118,55 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "memory_warning-95" {
   criteria {
 
     query = <<QUERY
-Perf
-| where CounterName == "% Committed Bytes In Use"
-| summarize AvgMemory = avg(CounterValue) by bin(TimeGenerated, 5m)
-QUERY
+      Perf
+      | where CounterName == "% Committed Bytes In Use"
+      | summarize AvgMemory = avg(CounterValue) by bin(TimeGenerated, 5m)
+      QUERY
 
     operator  = "GreaterThan"
     threshold = local.alert_thresholds.memory_critical
 
     time_aggregation_method = "Average"
+
+  }
+
+  action {
+    action_groups = [
+      azurerm_monitor_action_group.email_alerts.id
+    ]
+  }
+
+}
+
+# Heartbeat Alert Rule
+resource "azurerm_monitor_scheduled_query_rules_alert_v2" "vmss_heartbeat" {
+
+  name                = "vmss-heartbeat"
+  location            = azurerm_resource_group.rg03-monitoring.location
+  resource_group_name = azurerm_resource_group.rg03-monitoring.name
+  description         = "Action will be triggered when there is no heartbeat from VMSS for 10 minutes."
+
+  evaluation_frequency = "PT5M"
+  window_duration      = "PT10M"
+
+  scopes = [
+    azurerm_log_analytics_workspace.law01.id
+  ]
+
+  severity = 0
+
+  criteria {
+
+    query = <<QUERY
+      Heartbeat
+      | summarize LastHeartbeat=max(TimeGenerated) by Computer
+      | where LastHeartbeat < ago(5m)
+      QUERY
+
+    operator  = "GreaterThan"
+    threshold = 0
+
+    time_aggregation_method = "Count"
 
   }
 
