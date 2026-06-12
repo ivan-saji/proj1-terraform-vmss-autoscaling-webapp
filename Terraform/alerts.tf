@@ -28,7 +28,7 @@ resource "azurerm_monitor_metric_alert" "cpu-alert-95" {
     metric_name      = "Percentage CPU"
     aggregation      = "Maximum"
     operator         = "GreaterThan"
-    threshold        = 95
+    threshold        = local.alert_thresholds.cpu_critical
   }
 
   action {
@@ -50,7 +50,7 @@ resource "azurerm_monitor_metric_alert" "cpu-alert-80" {
     metric_name      = "Percentage CPU"
     aggregation      = "Maximum"
     operator         = "GreaterThan"
-    threshold        = 80
+    threshold        = local.alert_thresholds.cpu_warning
   }
 
   action {
