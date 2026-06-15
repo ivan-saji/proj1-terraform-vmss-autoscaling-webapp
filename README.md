@@ -29,7 +29,12 @@ Deploy a highly available web application on Azure using:
 - [x] Autoscaling Validation
 - [x] Azure Monitor
     - [x] Create Log Analytics Workspace
-    - [x] AddAMA extension in VMSS
+    - [x] Add AMA extension in VMSS
     - [x] DCR Rules
     - [x] Workspaces
-- [ ] Grafana
+    - [x] Setup action group and alerts
+        - [x] CPU 80 & 95% alerts
+        - [x] Memory Alerts
+        - [x] HeartBeat Alert (Beta)
+        - [ ] Scale event alerts (Up and Down)
+- [ ] Grafana / Azure Workbook dashboard

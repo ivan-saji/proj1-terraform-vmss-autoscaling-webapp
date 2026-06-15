@@ -13,8 +13,8 @@ resource "azurerm_monitor_action_group" "email_alerts" {
 
 #CPU Alert Rules
 
-resource "azurerm_monitor_metric_alert" "cpu-alert-95" {
-  name                = "cpu-alert-95"
+resource "azurerm_monitor_metric_alert" "cpu_alert_95" {
+  name                = "cpu_alert_95"
   resource_group_name = azurerm_resource_group.rg03-monitoring.name
   scopes              = [azurerm_linux_virtual_machine_scale_set.vmss01.id]
   description         = "Action will be triggered when CPU usage is greater than 95%."
@@ -35,8 +35,8 @@ resource "azurerm_monitor_metric_alert" "cpu-alert-95" {
     action_group_id = azurerm_monitor_action_group.email_alerts.id
   }
 }
-resource "azurerm_monitor_metric_alert" "cpu-alert-80" {
-  name                = "cpu-alert-80"
+resource "azurerm_monitor_metric_alert" "cpu_alert_80" {
+  name                = "cpu_alert_80"
   resource_group_name = azurerm_resource_group.rg03-monitoring.name
   scopes              = [azurerm_linux_virtual_machine_scale_set.vmss01.id]
   description         = "Action will be triggered when CPU usage is greater than 80%."
@@ -60,9 +60,9 @@ resource "azurerm_monitor_metric_alert" "cpu-alert-80" {
 
 #Memory Alert Rules
 
-resource "azurerm_monitor_scheduled_query_rules_alert_v2" "memory_warning-80" {
+resource "azurerm_monitor_scheduled_query_rules_alert_v2" "memory_warning_80" {
 
-  name                = "vmss-memory-warning-80"
+  name                = "vmss_memory_warning_80"
   location            = azurerm_resource_group.rg03-monitoring.location
   resource_group_name = azurerm_resource_group.rg03-monitoring.name
   description         = "Action will be triggered when Memory usage is greater than 80%."
@@ -99,9 +99,9 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "memory_warning-80" {
 
 }
 
-resource "azurerm_monitor_scheduled_query_rules_alert_v2" "memory_warning-95" {
+resource "azurerm_monitor_scheduled_query_rules_alert_v2" "memory_warning_95" {
 
-  name                = "vmss-memory-warning-95"
+  name                = "vmss_memory_warning_95"
   location            = azurerm_resource_group.rg03-monitoring.location
   resource_group_name = azurerm_resource_group.rg03-monitoring.name
   description         = "Action will be triggered when Memory usage is greater than 95%."
