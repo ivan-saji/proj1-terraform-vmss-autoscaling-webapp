@@ -36,5 +36,16 @@ Deploy a highly available web application on Azure using:
         - [x] CPU 80 & 95% alerts
         - [ ] Memory Alerts (Beta)
         - [x] HeartBeat Alert (Beta)
-        - [ ] Scale event alerts (Up and Down)
-- [ ] Grafana / Azure Workbook dashboard
+        - [x] Scale event alerts (Up and Down)
+
+Future Enhancements
+Version 1.1
+- Workbook Dashboard
+
+Version 1.2
+- GitHub Web App Deployment
+- CI/CD Pipeline
+
+Version 1.3
+- Grafana
+- Prometheus
