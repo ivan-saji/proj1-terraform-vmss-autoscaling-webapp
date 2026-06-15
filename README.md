@@ -34,7 +34,7 @@ Deploy a highly available web application on Azure using:
     - [x] Workspaces
     - [x] Setup action group and alerts
         - [x] CPU 80 & 95% alerts
-        - [x] Memory Alerts
+        - [ ] Memory Alerts (Beta)
         - [x] HeartBeat Alert (Beta)
         - [ ] Scale event alerts (Up and Down)
 - [ ] Grafana / Azure Workbook dashboard

@@ -59,7 +59,8 @@ resource "azurerm_monitor_metric_alert" "cpu_alert_80" {
 }
 
 #Memory Alert Rules
-
+/*
+Commenting memory rules for now as there is an issue with the query and it is not working as expected. Will investigate and update the code later.
 resource "azurerm_monitor_scheduled_query_rules_alert_v2" "memory_warning_80" {
 
   name                = "vmss_memory_warning_80"
@@ -138,6 +139,8 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "memory_warning_95" {
 
 }
 
+*/
+
 # Heartbeat Alert Rule
 resource "azurerm_monitor_scheduled_query_rules_alert_v2" "vmss_heartbeat" {
 
@@ -176,4 +179,24 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "vmss_heartbeat" {
     ]
   }
 
+}
+
+#Autoscale Alert Rule
+resource "azurerm_monitor_activity_log_alert" "autoscale_alert" {
+  name                = "vmss-autoscale-alert"
+  location            = azurerm_resource_group.rg03-monitoring.location
+  resource_group_name = azurerm_resource_group.rg03-monitoring.name
+  scopes              = [azurerm_linux_virtual_machine_scale_set.vmss01.id]
+
+  description         = "Action will be triggered when autoscale action is performed on VMSS."
+
+  criteria {
+    category = "Autoscale"
+    operation_name = "Microsoft.Insights/autoscaleSettings/scale"
+    status = "Succeeded"
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.email_alerts.id
+  }
 }
